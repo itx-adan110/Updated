@@ -1,0 +1,51 @@
+/* RESPONSIVE — final spacing and performance adjustments */
+@media (max-width: 1100px) {
+  .hero { gap: 45px; }
+  .section { width: min(92%, 1180px); }
+  .skills-section { gap: 35px; }
+}
+
+@media (max-width: 900px) {
+  .contact-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .certificate-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .section {
+    width: 91%;
+    padding: 62px 0;
+  }
+
+  .hero-actions .btn {
+    min-width: 0;
+  }
+
+  .modal-box,
+  .modal-box.glass {
+    max-height: 88vh;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-actions .btn { width: 100%; }
+
+  .hero-visual { min-height: 430px; }
+
+  .portrait-frame {
+    width: 64%;
+    height: 70%;
+  }
+
+  .availability-card { width: 49%; }
+  .location { width: 46%; }
+  .experience { width: 49%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal-box,
+  .theme-logo,
+  .portrait-frame {
+    transition: none !important;
+  }
+}

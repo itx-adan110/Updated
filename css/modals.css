@@ -1,0 +1,232 @@
+/* MODALS — existing modal structure and opening behavior */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+}
+
+.modal-box {
+  position: relative;
+  width: min(470px, 90%);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 35px;
+  border-radius: 22px;
+  transform: translateY(20px) scale(.97);
+  transition: transform .35s var(--ease);
+}
+
+.modal.open .modal-box { transform: none; }
+
+.modal-box h2 { margin-bottom: 12px; }
+
+.modal-box > p:not(.eyebrow) {
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+body.modal-open { overflow: hidden; }
+
+.hire-modal-box {
+  width: min(680px, 94%);
+  padding: 34px;
+}
+
+.hire-modal-intro { max-width: 540px; }
+
+.hire-credentials {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hire-credential {
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface);
+}
+
+.hire-credential span,
+.hire-contact small {
+  display: block;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.hire-credential strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.hire-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.hire-contact {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface);
+  color: inherit;
+  transition: transform .25s var(--ease), border-color .25s ease;
+}
+
+.hire-contact:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+}
+
+.hire-contact-icon {
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.hire-contact-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hire-contact span:last-child { min-width: 0; }
+
+.hire-contact strong {
+  display: block;
+  margin-top: 4px;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hire-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 17px;
+}
+
+.hire-actions .btn { flex: 1 1 210px; }
+
+.modal-actions {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.certificate-modal-box { width: min(760px, 94%); }
+
+.file-viewer-box {
+  width: min(900px, 94%);
+  max-height: 90vh;
+}
+
+.file-viewer-body {
+  min-height: 100px;
+  display: grid;
+  place-items: center;
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.file-preview-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 12px;
+}
+
+.file-preview-frame {
+  width: 100%;
+  height: 58vh;
+  display: block;
+  border: 0;
+  background: var(--bg);
+}
+
+.file-viewer-generic,
+.file-preview-generic {
+  display: grid;
+  gap: 8px;
+  padding: 50px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.file-preview-generic span {
+  color: var(--text);
+  font: 800 25px "Manrope";
+}
+
+.file-preview-generic strong { font-size: 11px; }
+.file-preview-generic small { font-size: 9px; }
+
+@media (max-width: 700px) {
+  .hire-credentials,
+  .hire-contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-box { padding: 28px 22px; }
+  .certificate-gallery .certificate-placeholder:nth-child(3) {
+    width: 100%;
+    grid-column: auto;
+  }
+}

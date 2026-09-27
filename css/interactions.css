@@ -1,0 +1,141 @@
+/* INTERACTIONS — cursor trail, taps, click feedback and logo motion */
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 34px;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 999px;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  background: var(--text);
+  box-shadow:
+    0 0 7px color-mix(in srgb, var(--text) 28%, transparent),
+    0 4px 12px color-mix(in srgb, var(--bg) 28%, transparent);
+  will-change: transform, opacity;
+}
+
+.cursor-trail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--text);
+  opacity: .28;
+  filter: blur(2px);
+}
+
+.cursor-click {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  z-index: 9998;
+  pointer-events: none;
+  border: 1px solid var(--text);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.4);
+}
+
+.cursor-click.show {
+  animation: cursorClick .42s var(--ease);
+}
+
+@keyframes cursorClick {
+  0% { opacity: .7; transform: translate(-50%, -50%) scale(.35); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
+}
+
+.touch-ripple {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  z-index: 9998;
+  pointer-events: none;
+  border: 1px solid var(--text);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(.35);
+  animation: touchRipple .5s var(--ease) forwards;
+}
+
+@keyframes touchRipple {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.2);
+  }
+}
+
+@media (pointer: fine) {
+  body { cursor: default; }
+}
+
+@media (pointer: coarse) {
+  .cursor-trail,
+  .cursor-click { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-trail,
+  .cursor-click,
+  .touch-ripple,
+  .hero-letter:hover {
+    animation: none !important;
+  }
+}
+
+.theme-logo {
+  position: absolute;
+  inset: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  object-fit: contain;
+  display: block;
+  transition: opacity .45s var(--ease), transform .55s var(--ease);
+}
+
+.theme-logo-dark {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.theme-logo-light {
+  opacity: 0;
+  transform: scale(.72) rotate(-12deg);
+}
+
+[data-theme="light"] .theme-logo-dark {
+  opacity: 0;
+  transform: scale(.72) rotate(12deg);
+}
+
+[data-theme="light"] .theme-logo-light {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.logo-switch.is-changing .theme-logo-dark {
+  transform: scale(.72) rotate(-18deg);
+}
+
+.logo-switch.is-changing .theme-logo-light {
+  transform: scale(.72) rotate(18deg);
+}
+
+.pressed {
+  transform: scale(.96) !important;
+}
+
+.social,
+.theme-toggle,
+.back-top,
+.brand-mark {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social:active,
+.theme-toggle:active,
+.back-top:active {
+  transform: scale(.9) !important;
+}
