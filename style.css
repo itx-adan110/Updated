@@ -29,6 +29,68 @@
   --ease: cubic-bezier(.22,.75,.2,1);
 }
 
+
+
+
+
+
+
+
+
+
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:#E9EDEF;
+  color:#0B141A;
+  font-family:"Manrope",sans-serif;
+}
+.wrap{text-align:center;padding:28px}
+.hero{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(42px,7.8vw,88px);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:-.055em;
+  white-space:nowrap;
+}
+.letter{
+  display:inline-block;
+  color:#0B141A;
+  transform-origin:50% 100%;
+  will-change:transform,color;
+}
+.space{display:inline-block;width:.28em}
+.info{
+  margin-top:22px;
+  font:500 12px/1.7 Arial,sans-serif;
+  color:#0B141A;
+  opacity:.52;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [data-theme="light"] {
   /* Main theme colors */
   --bg: #E9EDEF;
