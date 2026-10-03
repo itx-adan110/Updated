@@ -6,6 +6,165 @@
 
 const root = document.documentElement;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const letters=[...document.querySelectorAll(".letter")];
+
+const palette=[
+  "#4361EE","#FF7B00","#2B9348","#007F5F","#80B918",
+  "#8900F2","#FF0000","#FF8700","#147DF5","#BE0AFF",
+  "#00E676","#FF9100","#00B0FF","#D500F9","#FFEA00",
+  "#00E5FF","#FF3D00","#76FF03","#FF00AA","#2979FF"
+];
+
+const SHAKE_DURATION=1800;
+const COLOR_IN=100;
+const COLOR_LIFETIME=1800;
+const COLOR_FADE=500;
+
+let colorIndex=0;
+let lastLetter=null;
+const timers=new WeakMap();
+
+function nextColor(){
+  const color=palette[colorIndex % palette.length];
+  colorIndex++;
+  return color;
+}
+
+function clearTimer(letter){
+  const t=timers.get(letter);
+  if(!t)return;
+  clearTimeout(t.life);
+  clearTimeout(t.fade);
+}
+
+function scheduleColorFade(letter){
+  clearTimer(letter);
+
+  const life=setTimeout(()=>{
+    letter.style.transition=
+      `color ${COLOR_FADE}ms cubic-bezier(.22,.75,.2,1)`;
+    letter.style.color="#0B141A";
+
+    const fade=setTimeout(()=>{
+      letter.style.removeProperty("color");
+    },COLOR_FADE+20);
+
+    timers.set(letter,{life:null,fade});
+  },COLOR_LIFETIME);
+
+  timers.set(letter,{life,fade:null});
+}
+
+function startIndependentShake(letter){
+  letter.classList.remove("shaking");
+  void letter.offsetWidth;
+
+  const start=performance.now();
+
+  function animate(now){
+    const t=Math.min((now-start)/SHAKE_DURATION,1);
+
+    // Medium -> slow -> fully smooth stop.
+    const envelope=Math.pow(1-t,1.35);
+    // Fast oscillations at the start, progressively slowing into a smooth stop.
+    const phase=2*Math.PI*(5.2*t-2.35*t*t);
+    const wave=Math.sin(phase);
+
+    const x=2.8*wave*envelope;
+    const y=-1.0*Math.abs(wave)*envelope;
+    const rotation=2.5*wave*envelope;
+
+    letter.style.transform=
+      `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(${rotation.toFixed(2)}deg)`;
+
+    if(t<1){
+      requestAnimationFrame(animate);
+    }else{
+      letter.style.transform="translate3d(0,0,0) rotate(0deg)";
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function findLetter(x,y){
+  for(const letter of letters){
+    const r=letter.getBoundingClientRect();
+
+    if(
+      x>=r.left-4 && x<=r.right+4 &&
+      y>=r.top-4 && y<=r.bottom+4
+    ) return letter;
+  }
+  return null;
+}
+
+function activate(letter){
+  if(!letter || letter===lastLetter)return;
+
+  letter.style.transition=
+    `color ${COLOR_IN}ms cubic-bezier(.22,.75,.2,1)`;
+
+  letter.style.color=nextColor();
+
+  startIndependentShake(letter);
+  scheduleColorFade(letter);
+
+  lastLetter=letter;
+}
+
+document.addEventListener("pointermove",event=>{
+  const letter=findLetter(event.clientX,event.clientY);
+
+  if(letter){
+    activate(letter);
+  }else{
+    lastLetter=null;
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* =========================================================
    THEME
 ========================================================= */
