@@ -3,12 +3,12 @@
    ========================================================================== */
 :root {
   /* Main theme colors */
-  --bg: #0B1421;
+  --bg: #121212;
   --light: #E9EDEF;
 
   /* Text */
   --text: #E9EDEF;
-  --text-inverse: #0B1421;
+  --text-inverse: #121212;
 
   /* Shared surfaces / borders */
   --surface: rgba(255,255,255,.045);
@@ -42,14 +42,14 @@
   --muted: rgba(11,20,26,.64);
   --muted-2: rgba(11,20,26,.46);
   --accent: #343B40;
-  --accent-strong: #0B1421;
+  --accent-strong: #121212;
 
   /* Light theme keeps a neutral charcoal navbar */
   --navbar: #343638;
   --navbar-text: #E9EDEF;
 
   /* Text */
-  --text: #0B1421;
+  --text: #121212;
   --text-inverse: #E9EDEF;
 }
 /* ==========================================================================
