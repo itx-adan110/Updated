@@ -4,10 +4,10 @@
 :root {
   /* Main theme colors */
   --bg: #000000;
-  --light: #E9EDEF;
+  --light: #FFFFFF;
 
   /* Text */
-  --text: #E9EDEF;
+  --text: #FFFFFF;
   --text-inverse: #000000;
 
   /* Shared surfaces / borders */
@@ -18,11 +18,11 @@
   --muted: rgba(233,237,239,.68);
   --muted-2: rgba(233,237,239,.48);
   --accent: #C9D0D5;
-  --accent-strong: #E9EDEF;
+  --accent-strong: #FFFFFF;
 
   /* Same charcoal navbar in both themes */
   --navbar: #000000;
-  --navbar-text: #E9EDEF;
+  --navbar-text: #FFFFFF;
 
   /* Theme-independent */
   --radius: 18px;
@@ -31,8 +31,8 @@
 
 [data-theme="light"] {
   /* Main theme colors */
-  --bg: #E9EDEF;
-  --light: #E9EDEF;
+  --bg: #FFFFFF;
+  --light: #FFFFFF;
 
   /* Light-theme surfaces / borders */
   --surface: rgba(255,255,255,.62);
@@ -46,11 +46,11 @@
 
   /* Light theme keeps a neutral charcoal navbar */
   --navbar: #343638;
-  --navbar-text: #E9EDEF;
+  --navbar-text: #FFFFFF;
 
   /* Text */
   --text: #000000;
-  --text-inverse: #E9EDEF;
+  --text-inverse: #FFFFFF;
 }
 /* ==========================================================================
    RESET / BASE
